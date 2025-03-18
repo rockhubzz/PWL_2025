@@ -8,7 +8,7 @@
         | @yield('subtitle')
     @endif
 @stop
-{{-- JB 5 Praktikum 2 --}}
+
 @vite('resources/js/app.js')
 
 {{-- Extend and customize the page content header --}}
@@ -54,7 +54,7 @@
             // Add your common script logic here...
         });
     </script> --}}
-    {{-- JB 5 Praktikum 2 --}}
+
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 @endpush
 
@@ -62,7 +62,7 @@
 
 {{-- Add common CSS customizations --}}
 @push('css')
-{{-- JB 5 Praktikum 2 --}}
+
     <link rel="stylesheet"href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
 
     <style type="text/css">
