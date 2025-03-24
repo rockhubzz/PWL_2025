@@ -6,6 +6,7 @@ use App\Models\LevelModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
+use Monolog\Level;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -136,10 +137,13 @@ class UserController extends Controller
             'title' => 'Daftar user yang terdaftar dalam sistem'
         ];
 
+        $level = LevelModel::all();
+
         $activeMenu = 'user';
         return view('user.index', [
-            'breadcrumb' => $breadcrumb, 
-            'page' => $page, 
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'level' => $level,
             'activeMenu' => $activeMenu
         ]);
     }
@@ -147,6 +151,10 @@ class UserController extends Controller
     public function list(Request $request){
         $users = UserModel::select('user_id', 'username', 'nama', 'level_id')->with('level')->with('level');
 
+        if($request->level_id){
+            $users->where('level_id', $request->level_id);
+        }
+        
         return DataTables::of($users)
         ->addIndexColumn()
         ->addColumn('aksi', function($user) {
