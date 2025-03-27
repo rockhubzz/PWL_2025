@@ -61,7 +61,7 @@ class BarangController extends Controller
     {
         if ($request->ajax()) {
             $validator = Validator::make($request->all(), [
-                'barang_kode' => 'required|string|min:7|max:10|unique:m_barang,barang_kode',
+                'barang_kode' => 'required|string|unique:m_barang,barang_kode',
                 'barang_nama' => 'required|string|max:100',
                 'harga_beli' => 'required|integer',
                 'harga_jual' => 'required|integer',
@@ -134,6 +134,13 @@ class BarangController extends Controller
             }
         }
         return redirect('/');
+    }
+
+    public function confirm_ajax(string $id)
+    {
+        $barang = BarangModel::find($id);
+
+        return view('barang.confirm_ajax', ['barang' => $barang]);
     }
 
     public function delete_ajax(Request $request, $id)

@@ -66,7 +66,7 @@ class LevelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'level_kode' => 'required|string|min:2|unique:m_level,level_kode',
+            'level_kode' => 'required|string|unique:m_level,level_kode',
             'level_nama' => 'required|string|max:100'
         ]);
 
@@ -157,7 +157,7 @@ class LevelController extends Controller
         // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'level_kode' => 'required|string|min:3|max:10|unique:m_level,level_kode',
+                'level_kode' => 'required|string|unique:m_level,level_kode',
                 'level_nama' => 'required|string|max:100'
             ];
 

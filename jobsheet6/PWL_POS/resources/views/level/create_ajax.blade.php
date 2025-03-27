@@ -31,7 +31,7 @@
     $(document).ready(function() {
         $("#form-tambah").validate({
             rules: {
-                level_kode: { required: true, minlength: 3, maxlength: 10 },
+                level_kode: { required: true},
                 level_nama: { required: true, minlength: 1, maxlength: 100 }
             },
             submitHandler: function(form) {
