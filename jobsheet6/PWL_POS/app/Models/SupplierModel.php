@@ -10,7 +10,7 @@
      use HasFactory;
  
      protected $table = 'm_supplier';
-     protected $primaryKey = 'id';
+     protected $primaryKey = 'supplier_id';
      protected $fillable = [
          'supplier_kode',
          'supplier_nama',

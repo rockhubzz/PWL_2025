@@ -275,7 +275,12 @@ class UserController extends Controller
         ]);
         
     }
-    public function edit(string $id){
+    public function show_ajax(string $id)
+    {
+        $user = UserModel::with('level')->find($id);
+
+        return view('user.show_ajax', ['user' => $user]);
+    }    public function edit(string $id){
         $user = UserModel::find($id);
         $level = LevelModel::all();
         
