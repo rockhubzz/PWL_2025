@@ -98,7 +98,7 @@ Route::group(['prefix' => 'kategori'], function(){
     Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']);
 
 });
-
+Route::middleware(['authorize:ADM,MNG'])->group(function () {
 Route::group(['prefix' => 'barang'], function(){
     Route::get('/create_ajax', [BarangController::class, 'create_ajax']);
     Route::get('/', [BarangController::class, 'index']);
@@ -114,7 +114,7 @@ Route::group(['prefix' => 'barang'], function(){
     Route::put('/{id}/update_ajax', [BarangController::class, 'update_ajax']);
     Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']);
-    
+});
 });
 
 Route::group(['prefix' => 'supplier'], function(){
