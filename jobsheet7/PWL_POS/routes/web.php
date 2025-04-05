@@ -59,7 +59,7 @@ Route::group(['prefix' => 'user'], function(){
     Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']);
     // Route::delete('/{id}', [UserController::class, 'destroy']);
 });
-
+Route::middleware(['authorize:ADM'])->group(function () {
 Route::group(['prefix' => 'level'], function(){
     Route::get('/create_ajax', [LevelController::class, 'create_ajax']);
     Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']);
@@ -77,6 +77,7 @@ Route::group(['prefix' => 'level'], function(){
     Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax']);
     Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']);
     
+});
 });
 
 Route::group(['prefix' => 'kategori'], function(){

@@ -20,8 +20,7 @@ class UserModel extends Authenticatable
         'username',
         'nama',
         'password'
-    ]; // Mendefinisikan kolom yang dapat diisi oleh model ini
-
+    ];
     public function level():BelongsTo {
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
     }
@@ -29,5 +28,15 @@ class UserModel extends Authenticatable
     {
         return $this->hasMany(StokModel::class, 'user_id', 'user_id');
     }
+
+    public function getRoleName(): string
+     {
+         return $this->level->level_nama;
+     }
+ 
+     public function hasRole(string $role): bool
+     {
+         return $this->level->level_kode === $role;
+     }
 
 }
