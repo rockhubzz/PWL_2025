@@ -62,6 +62,7 @@
             </div>
         </div>
     </div>
+    <a href="{{ url('register') }}" >Registrasi User</a>
     
     <!-- Scripts -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>

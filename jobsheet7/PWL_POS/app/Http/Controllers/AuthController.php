@@ -13,7 +13,6 @@ class AuthController extends Controller
 {
     public function login()
     {
-        // Jika sudah login, maka redirect ke halaman home
         if (Auth::check()) {
             return redirect('/');
         }
@@ -54,11 +53,7 @@ class AuthController extends Controller
 
     public function register()
     {
-        if (Auth::check()) {
-            return redirect('/');
-        }
-
-        $levels = LevelModel::all(); // Ambil semua level dari database
+        $levels = LevelModel::all();
         return view('auth.register', compact('levels'));
     }
 
@@ -66,7 +61,7 @@ class AuthController extends Controller
     {
         $rules = [
             'level_id' => 'required|exists:m_level,level_id',
-            'username' => 'required|string|min:3|unique:m_user,username',
+            'username' => 'required|string|unique:m_user,username',
             'nama' => 'required|string|max:100',
             'password' => 'required|confirmed',
         ];
@@ -75,9 +70,9 @@ class AuthController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => false, // response status, false: error/gagal, true: berhasil
+                'status' => false,
                 'message' => 'Validasi Gagal',
-                'msgField' => $validator->errors() // pesan error validasi
+                'msgField' => $validator->errors()
             ]);
         }
 
@@ -85,15 +80,13 @@ class AuthController extends Controller
             'level_id' => $request->level_id,
             'username' => $request->username,
             'nama' => $request->nama,
-            'password' => $request->password, // Tidak perlu melakukan hash karena sudah di-hash otomatis oleh casts pada UserModel
+            'password' => Hash::make($request->password),
         ]);
-
-        Auth::login($user);
 
         return response()->json([
             'status' => true,
             'message' => 'Registrasi Berhasil',
-            'redirect' => url('/')
+            'redirect' => url('/login')
         ]);
     }
 }
