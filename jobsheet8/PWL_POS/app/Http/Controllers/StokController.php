@@ -12,6 +12,8 @@ use App\Models\SupplierModel;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 
@@ -430,6 +432,22 @@ public function delete_ajax(Request $request, $id)
         $writer->save('php://output');
         exit;
     }
+
+    public function export_pdf()
+    {
+        $stok = StokModel::select('barang_id','supplier_id', 'stok_tanggal', 'stok_jumlah')
+                ->orderBy('barang_id')
+                ->with('barang', 'supplier')
+                ->get();
+                
+        $pdf = Pdf::loadView('stok.export_pdf', ['stok' => $stok]);
+        $pdf->setPaper('a4', 'portrait');
+        $pdf->setOption("isRemoteEnabled", true);
+        $pdf->render();
+
+        return $pdf->stream('Data Barang '.date('Y-m-d H:i:s').'.pdf');
+    }
+
 
     
 
