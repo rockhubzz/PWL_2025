@@ -1,4 +1,15 @@
 <div class="sidebar">
+  {{-- <div class="user-panel d-flex flex-column align-items-center text-center ms-4"> --}}
+    <div class="user-panel d-flex align-items-center ms-3" style="padding: 10px">
+      <div class="image position-relative">
+        <img src="{{ asset('pfp/' . (Auth::user()->foto_profil ?? 'default-profile.png')) }}"
+          class="img-circle elevation-2"
+          alt="User Image"
+          style="width: 50px; height: 50px; object-fit: cover; border: 2px solid white;">
+        </div>
+        <a href="{{url('/profile')}}" class="mb-0 ms-2" style="color:white; margin-left: 20px;">{{ Auth::user()->nama }}</a>
+    </div>
+
   <!-- SidebarSearch Form -->
   <div class="form-inline mt-2">
   <div class="input-group" data-widget="sidebar-search">
@@ -65,6 +76,11 @@
   <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
       @csrf
   </form>
+  <li class="nav-header">Akun</li>
+  <a href="{{ url('/profile') }}" class="nav-link {{ $activeMenu == 'profile' ? 'active' : '' }} ">
+    <i class="nav-icon fas fa-user"></i>
+    <p>Ubah Profile</p>
+</a>
   <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
       <i class="nav-icon fas fa-sign-out-alt"></i>
       <p>Log Out</p>

@@ -4,6 +4,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\TemplateController;
@@ -32,7 +33,7 @@ Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'postRegister']);
 
 Route::middleware(['auth'])->group(function () {
-
+    
     Route::get('/', [WelcomeController::class, 'index']);
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth');
     
@@ -44,7 +45,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
     Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
     Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
-
+    Route::get('profile', [ProfileController::class, 'index']);
+    Route::get('profile/update_foto', [ProfileController::class, 'updateFoto'])->middleware('auth');
+    Route::post('profile/save', [ProfileController::class, 'simpanFoto'])->middleware('auth');
+    
 Route::middleware(['authorize:ADM'])->group(function () {
 Route::group(['prefix' => 'level'], function(){
     Route::get('/create_ajax', [LevelController::class, 'create_ajax']);
