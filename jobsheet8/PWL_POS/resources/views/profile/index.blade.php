@@ -30,17 +30,17 @@
                     <td>{{ $user->level->level_nama }}</td>
                 </tr>
                 <tr>
-                    <th>Username</th>
-                    <td>{{ $user->username }}</td>
-                </tr>
-                <tr>
                     <th>Nama</th>
                     <td>{{ $user->nama }}</td>
                 </tr>
                 <tr>
+                    <th>Username</th>
+                    <td>{{ $user->username }}</td>
+                </tr>
+                {{-- <tr>
                     <th>Password</th>
                     <td>********</td>
-                </tr>
+                </tr> --}}
             </table>
         </div>
         <div class="d-flex justify-content-center">

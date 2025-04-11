@@ -54,6 +54,7 @@ class ProfileController extends Controller
             $file = $request->file('foto_profile');
             $filename = 'pfp_' . $user->user_id . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('public/uploads/pfp', $filename);
+            $path = $file->move(public_path('pfp'), $filename);
 
             // Update database
             $user->foto_profil = $filename;

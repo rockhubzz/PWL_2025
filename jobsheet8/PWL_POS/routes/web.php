@@ -48,6 +48,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile', [ProfileController::class, 'index']);
     Route::get('profile/update_foto', [ProfileController::class, 'updateFoto'])->middleware('auth');
     Route::post('profile/save', [ProfileController::class, 'simpanFoto'])->middleware('auth');
+    Route::get('/user/{id}/edit_ajax', [UserController::class, 'edit_ajax']);
+
     
 Route::middleware(['authorize:ADM'])->group(function () {
 Route::group(['prefix' => 'level'], function(){
@@ -83,7 +85,7 @@ Route::group(['prefix' => 'user'], function(){
     Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
     Route::get('/{id}/edit', [UserController::class, 'edit']);
     Route::put('/{id}', [UserController::class, 'update']);
-    Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']);
+    // Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']);
     Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax']);
     Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']);
